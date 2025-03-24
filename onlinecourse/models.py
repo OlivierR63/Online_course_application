@@ -101,3 +101,25 @@ class Enrollment(models.Model):
 #class Submission(models.Model):
 #    enrollment = models.ForeignKey(Enrollment, on_delete=models.CASCADE)
 #    choices = models.ManyToManyField(Choice)
+
+class Question(Model.models):
+    course=models.ForeignKey(Course, on_delete=models.CASCADE)
+    content=models.CharField(max_length=200)
+    grade=models.IntegerField(default=50)
+
+    def __str__(self):
+        return f"Question : {self.content}"
+
+        # method to calculate if the learner gets the score of the question
+    def is_get_score(self, selected_ids):
+        all_answers = self.choice_set.filter(is_correct=True).count()
+        selected_correct = self.choice_set.filter(is_correct=True, id__in=selected_ids).count()
+        if all_answers == selected_correct:
+            return True
+        else:
+            return False
+
+class Choice(Model.models):
+    question = models.ForeignKey(QUestion, on_delete=models.CASCADE)
+    textContent = models.CharField(max_length=200)
+    is_correct=models.BooleanField(default = False)
