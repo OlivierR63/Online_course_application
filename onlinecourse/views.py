@@ -112,7 +112,7 @@ def submit(request, course_id):
     choices=extract_answers(request)
     submission.choices.set(choices)
     submission_id=submission.id
-    return HttpResponseRedirect(viewname='onminecourse:exam_result', args=(course_id, submission_id))
+    return HttpResponseRedirect(viewname='onlinecourse:exam_result', args=(course_id, submission_id))
 
 # An example method to collect the selected choices from the exam form from the request object
 def extract_answers(request):
@@ -139,7 +139,7 @@ def show_exam_result(request, course_id, submission_id):
         selected_choices=choices.filter(question=question)
 
         # Check if the selected choices are the same as the correct choices
-        if set(corect_choices) == set(selected_choices):
+        if set(correct_choices) == set(selected_choices):
             total_score += question.grade
     
     context['course'] = course
