@@ -7,15 +7,15 @@ class QuestionInline(admin.StackedInline):
 
 class ChoiceInline(admin.StackedInline):
     model = Choice
-    extra = 5
+    extra = 2
 
 class SubmissionInline(admin.StackedInline):
     model = Submission
-    extra = 5
+    extra = 2
 
 class LessonInline(admin.StackedInline):
     model = Lesson
-    extra = 5
+    extra = 2
 
 class CourseAdmin(admin.ModelAdmin):
     inlines = [LessonInline]
